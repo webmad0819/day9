@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: "";
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      html,
+      body {
+        overflow: hidden;
+        background: white;
+      }
+
+      #myCanvas {
+        /* background: red; */
+        background: white;
+      }
+
+      section {
+          position: absolute;
+          top: 0;
+      }
+
+      section p {
+          margin-bottom: 20px;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.11.0/d3.js"></script>
+  </head>
+  <body>
+    <section>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam unde
+        vitae quas fuga, veniam id sunt natus ratione dolore architecto. Omnis
+        ducimus quas explicabo saepe vel, quam corrupti voluptatem debitis!
+      </p>
+      <p>
+        Maxime, excepturi quae laboriosam quidem quaerat iure praesentium fugit
+        temporibus eius cum ipsa adipisci inventore ut eaque itaque illo,
+        tempore porro? Consequatur vitae ex ad voluptatem? Repudiandae veritatis
+        modi eaque.
+      </p>
+      <p>
+        Harum consectetur ratione neque fugit odit rem, molestias eligendi nemo
+        dignissimos distinctio soluta saepe commodi minus enim voluptates
+        deserunt tenetur cumque aperiam nam officia. Sed iusto distinctio eos
+        vero animi?
+      </p>
+      <p>
+        Sunt delectus, sapiente aspernatur vitae doloribus suscipit omnis amet
+        voluptatum dolore incidunt porro architecto modi dolores quod saepe
+        molestias ipsam nihil, vel neque. Voluptatibus molestiae quaerat
+        repudiandae, consequatur corporis fuga.
+      </p>
+      <p>
+        Vitae sit velit excepturi, dolores atque, sunt maiores quod voluptates,
+        consequatur tempora voluptatum modi eligendi molestias facilis soluta
+        beatae illo! Sunt quidem earum nostrum animi iure voluptas nam enim
+        culpa?
+      </p>
+      <p>
+        Nam, voluptatem. Minus ratione sed delectus harum temporibus error
+        aspernatur cupiditate, reprehenderit ipsam nam quaerat reiciendis!
+        Accusantium, qui a nam sequi odio omnis ducimus ea repudiandae magnam
+        molestiae hic fugiat?
+      </p>
+      <p>
+        At eius ipsum, veritatis, rerum tenetur nesciunt ipsa harum maxime aut
+        ab minima illum repudiandae veniam itaque et aliquam quia iusto cum ex!
+        Quos fuga esse, nobis vero adipisci vel?
+      </p>
+      <p>
+        Itaque ipsam nobis unde dolorem tempore expedita, nemo harum et, numquam
+        eveniet error quod quisquam asperiores pariatur eum dolorum doloribus
+        animi minima quaerat. Molestias laudantium amet optio ducimus nesciunt
+        iusto?
+      </p>
+      <p>
+        Nobis hic, possimus omnis at voluptates sequi! Neque, perspiciatis!
+        Aliquam amet vero dignissimos laborum cumque vitae porro at! Labore
+        ipsam culpa voluptatem doloribus, exercitationem hic suscipit libero
+        dolores qui vel!
+      </p>
+      <p>
+        Unde ea ab, necessitatibus non commodi omnis tempora sint laboriosam
+        officia earum explicabo facilis ipsam, architecto dolores aliquid
+        molestias, id accusantium nostrum fugit porro laudantium mollitia
+        eligendi natus soluta? Quis!
+      </p>
+    </section>
+    <canvas id="myCanvas"></canvas>
+    <script>
+      const myCanvasDOMEl = document.querySelector("#myCanvas");
+      const ctx = myCanvasDOMEl.getContext("2d");
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const w2 = w / 2;
+      const h2 = h / 2;
+      const PI = Math.PI;
+      const PI_DOUBLE = Math.PI * 2;
+      const PI_HALF = Math.PI / 2;
+
+      function setCanvasDimensions() {
+        // x axis
+        myCanvasDOMEl.setAttribute("width", `${w}px`);
+        // y axis
+        myCanvasDOMEl.setAttribute("height", `${h}px`);
+      }
+      setCanvasDimensions();
+
+      window.onresize = setCanvasDimensions;
+
+      function randomFloat(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+
+      let colorScale = d3
+        .scaleLinear()
+        .domain([0, w])
+        .range([0, 255]);
+      let colorScale2 = d3
+        .scaleLinear()
+        .domain([0, w])
+        .range([0, 360]);
+
+      const gap = 1
+      Array(w)
+        .fill()
+        .forEach((x, idx) => {
+          ctx.beginPath();
+          ctx.moveTo(idx * gap, h);
+          ctx.lineTo(idx * gap, 0);
+          ctx.strokeStyle = `rgb(${colorScale(idx)}, 0, 0, 1)`
+          //ctx.strokeStyle = `hsla(${colorScale2(idx * gap)}, 100%, 50%, .3)`;
+          ctx.stroke();
+          ctx.closePath();
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: "";
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      html,
+      body {
+        overflow: hidden;
+        background: white;
+      }
+
+      #myCanvas {
+        /* background: red; */
+        background: white;
+      }
+
+      section {
+        position: absolute;
+        top: 0;
+      }
+
+      section p {
+        margin-bottom: 20px;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.11.0/d3.js"></script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+    <script>
+      const myCanvasDOMEl = document.querySelector("#myCanvas");
+      const ctx = myCanvasDOMEl.getContext("2d");
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const w2 = w / 2;
+      const h2 = h / 2;
+      const PI = Math.PI;
+      const PI_DOUBLE = Math.PI * 2;
+      const PI_HALF = Math.PI / 2;
+
+      function setCanvasDimensions() {
+        // x axis
+        myCanvasDOMEl.setAttribute("width", `${w}px`);
+        // y axis
+        myCanvasDOMEl.setAttribute("height", `${h}px`);
+      }
+      setCanvasDimensions();
+
+      window.onresize = setCanvasDimensions;
+
+      function randomFloat(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+
+      let time = 0;
+      let timeScale = d3
+        .scaleLinear()
+        .domain([0, 3000])
+        .range([0, 360]);
+
+      // color the text
+
+      ctx.font = "100px Arial";
+
+      let cycle = 0
+
+      const intervalID = setInterval(() => {
+        time++;
+        cycle++
+
+        ctx.clearRect(0, 0, w, h);
+        // ctx.fillStyle = `rgb(${timeScale(time)}, 0, 0, 1)`;
+        ctx.fillStyle = `hsla(${timeScale(cycle)}, 100%, 50%, 1)`;
+        ctx.save();
+        ctx.translate(w2 - 200, h2);
+        ctx.fillText("Time elapsed: " + time + " ms", 20, 40);
+        ctx.restore();
+
+        if (cycle >= 3000) {
+            cycle = 0
+        }
+
+        // if (time >= 3000) {
+        //   clearInterval(intervalID);
+        // }
+      }, 1);
+    </script>
+  </body>
+</html>
